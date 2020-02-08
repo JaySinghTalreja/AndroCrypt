@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/file"
+        android:title="File Encryption"
+        android:icon="@drawable/ic_file"/>
+    <item
+        android:id="@+id/message"
+        android:title="Message Encryption"
+        android:icon="@drawable/ic_message"/>
+</menu>
