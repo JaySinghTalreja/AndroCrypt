@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
@@ -43,6 +44,7 @@ public class FileEncryptionActivity extends AppCompatActivity {
     private Button varSelectFileButton;
     private EditText varPassword;
     private Button varEncryptButton;
+    private Button varDecryptButton;
     private String varFilePath = "";
     //INTENT
     Intent getFileIntent;
@@ -59,13 +61,11 @@ public class FileEncryptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_file_encryption);
 
 
-
-
         varSelectFile = (TextView) findViewById(R.id.selectfile);
         varSelectFileButton = (Button)findViewById(R.id.selectbutton);
         varPassword = (EditText) findViewById(R.id.Userpassword);
         varEncryptButton = (Button) findViewById(R.id.doEncrypt);
-
+        varDecryptButton = (Button) findViewById(R.id.doDecrypt);
 
         varSelectFileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +73,6 @@ public class FileEncryptionActivity extends AppCompatActivity {
                 getFileIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 getFileIntent.setType("*/*");
                 startActivityForResult(getFileIntent, 10);
-
 
             }
         });
@@ -83,6 +82,15 @@ public class FileEncryptionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(arePermissionsEnabled()){
                     performEncode(varFilePath, varPassword.getText().toString());
+                }
+            }
+        });
+
+        varDecryptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(arePermissionsEnabled()) {
+                    performDecode(varFilePath, varPassword.getText().toString());
                 }
             }
         });
@@ -113,7 +121,7 @@ public class FileEncryptionActivity extends AppCompatActivity {
             else {
                 File dFile = new File(varPath);
                 FileInputStream fis = new FileInputStream(dFile);
-                File kFile = new File(varPath.concat(".crypt"));
+                File kFile = new File(varPath.concat(".incrypt"));
                 FileOutputStream fos = new FileOutputStream(kFile);
 
                 byte[] key = ("JAYSINGHTALREJA" + varPass).getBytes("UTF-8");
@@ -145,6 +153,40 @@ public class FileEncryptionActivity extends AppCompatActivity {
 
     }
 
+    private void performDecode(String varPath, String varPass) {
+        try{
+            if(varPath.isEmpty() || varPass.isEmpty()) {
+                InvalidDataEncryptNotifcation("Data Validation Error");
+            }
+            else{
+                FileInputStream fis = new FileInputStream(varPath);
+                FileOutputStream fos = new FileOutputStream(varPath.replace(".incrypt",""));
+                byte[] key = ("JAYSINGHTALREJA" + varPass).getBytes("UTF-8");
+                MessageDigest sha = MessageDigest.getInstance("SHA-1");
+                key = sha.digest(key);
+                key = Arrays.copyOf(key,16);
+                SecretKeySpec sks = new SecretKeySpec(key, "AES");
+                Cipher cipher = Cipher.getInstance("AES");
+                cipher.init(Cipher.DECRYPT_MODE, sks);
+                CipherInputStream cis = new CipherInputStream(fis, cipher);
+                int b;
+                byte[] d = new byte[8];
+                while((b = cis.read(d)) != -1) {
+                    fos.write(d, 0, b);
+                }
+                fos.flush();
+                fos.close();
+                cis.close();
+                InvalidDataEncryptNotifcation("Decrypted");
+            }
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
     private void InvalidDataEncryptNotifcation(String clipboardnotification) {
         Context context = getApplicationContext();
         CharSequence text = clipboardnotification;
@@ -158,7 +200,7 @@ public class FileEncryptionActivity extends AppCompatActivity {
         switch(requestCode){
             case 10:
                 if(requestCode == 10) {
-                    
+
                     /*Uri varData = data.getData();
                     File varFile = new File(varData.getPath());
                     final String[] split = varFile.getPath().split(":");//split the path.
