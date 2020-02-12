@@ -37,6 +37,14 @@ public class MessageEncryption extends AppCompatActivity {
     private TextView encryptedMessageView;
     private String OutputString;
     private String AES = "AES";
+    public BottomNavigationView bottomNavigationView;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        MenuItem homeItem = bottomNavigationView.getMenu().getItem(0);
+        bottomNavigationView.setSelectedItemId(homeItem.getItemId());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +88,18 @@ public class MessageEncryption extends AppCompatActivity {
             }
         });
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.message);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.file:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0, 0);
+                        //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        //overridePendingTransition(0, 0);
+                        Intent a = new Intent(getApplicationContext(),MainActivity.class);
+                        a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(a);
                         return true;
                     case R.id.message:
                         return true;
@@ -97,6 +108,7 @@ public class MessageEncryption extends AppCompatActivity {
             }
         });
     }
+
     private void ToastClipboardNotifcation(String clipboardnotification) {
         Context context = getApplicationContext();
         CharSequence text = clipboardnotification;

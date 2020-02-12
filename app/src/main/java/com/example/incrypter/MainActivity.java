@@ -42,8 +42,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.file:
                         return true;
                     case R.id.message:
-                        startActivity(new Intent(getApplicationContext(), MessageEncryption.class));
-                        overridePendingTransition(0, 0);
+                        Intent a = new Intent(getApplicationContext(),MessageEncryption.class);
+                        a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(a);
+                        //startActivity(new Intent(getApplicationContext(), MessageEncryption.class));
+                        //overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;
