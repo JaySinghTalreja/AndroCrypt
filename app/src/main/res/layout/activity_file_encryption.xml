@@ -37,7 +37,8 @@
         android:text="Enter Your Password"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_below="@id/selectbutton"/>
+        android:layout_below="@id/selectbutton"
+        />
 
     <EditText
         android:id="@+id/Userpassword"
@@ -60,5 +61,14 @@
         android:layout_marginTop="40dp"
         />
 
+    <Button
+        android:id="@+id/doDecrypt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Decrypt"
+        android:layout_below="@id/doEncrypt"
+        android:layout_marginTop="20dp"
+        />
 
 </RelativeLayout>
