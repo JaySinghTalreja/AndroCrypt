@@ -2,6 +2,7 @@ package com.example.incrypter;
 
         import androidx.annotation.NonNull;
         import androidx.appcompat.app.AppCompatActivity;
+        import androidx.appcompat.widget.Toolbar;
 
         import android.content.Intent;
         import android.os.Bundle;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     public FloatingActionButton floatingActionButton;
     private BottomNavigationView bottomNavigationView;
+    Toolbar myToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Custom App Bar
+        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
