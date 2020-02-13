@@ -9,14 +9,81 @@
     <include layout="@layout/appbar"/>
 
     <TextView
+        android:id="@+id/FileEncryptionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bottom_navigation"
+        android:layout_below="@+id/my_toolbar"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="282dp"
+        android:layout_marginTop="80sp"
         android:text="File Encryption"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/advent_pro_semibold" />
+
+    <TextView
+        android:id="@+id/FileEncryptionDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FileEncryptionText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10sp"
+        android:text="Encrypt Pictures, Videos or Any File"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/annie_use_your_telescope" />
+
+
+    <TextView
+        android:id="@+id/StepOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FileEncryptionDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90sp"
+
+        android:text=" ● Press The Button Below"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/audiowide" />
+
+    <TextView
+        android:id="@+id/StepTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/StepOne"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
+
+        android:text=" ● Select Your File"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/audiowide" />
+
+    <TextView
+        android:id="@+id/StepThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/StepTwo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
+
+        android:text=" ● Enter Your Password"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/audiowide" />
+
+    <TextView
+        android:id="@+id/StepFour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/StepThree"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
+
+        android:text=" ● Done"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/audiowide" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
