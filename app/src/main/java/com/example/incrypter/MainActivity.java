@@ -78,10 +78,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.sign_out:
                 finish();
                 break;
+            case R.id.about:
+                Intent a = new Intent(getApplicationContext(),About.class);
+                a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(a);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
 }
