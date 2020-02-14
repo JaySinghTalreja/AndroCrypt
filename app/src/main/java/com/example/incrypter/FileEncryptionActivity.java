@@ -2,6 +2,7 @@ package com.example.incrypter;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,6 +62,12 @@ public class FileEncryptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_encryption);
 
+        //Setting Back Button in Custom Action Bar On File Action Activity
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+        //Set Back Button
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         varSelectFile = (TextView) findViewById(R.id.selectfile);
         varSelectFileButton = (Button)findViewById(R.id.selectbutton);
@@ -224,4 +232,5 @@ public class FileEncryptionActivity extends AppCompatActivity {
                 }
         }
     }
+
 }

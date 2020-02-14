@@ -6,6 +6,7 @@ package com.example.incrypter;
 
         import android.content.Intent;
         import android.os.Bundle;
+        import android.view.Menu;
         import android.view.MenuItem;
         import android.view.View;
 
@@ -59,5 +60,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    //For ActionBar's Overflow Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menuactionbar, menu);
+        //U can find item set icon and stuff...
+        //MenuItem item= menu.findItem(R.id.action_search);
+        return true;
+    }
+    //For Performing Actions on Overflow Menu | Action Bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.sign_out:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
 }

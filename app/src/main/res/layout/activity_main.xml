@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <include layout="@layout/appbar"/>
 
     <TextView
@@ -31,7 +32,6 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:fontFamily="@font/annie_use_your_telescope" />
-
 
     <TextView
         android:id="@+id/StepOne"
