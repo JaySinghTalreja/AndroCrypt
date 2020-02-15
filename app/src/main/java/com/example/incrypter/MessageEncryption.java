@@ -2,6 +2,7 @@ package com.example.incrypter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Base64;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -38,7 +40,7 @@ public class MessageEncryption extends AppCompatActivity {
     private String OutputString;
     private String AES = "AES";
     public BottomNavigationView bottomNavigationView;
-
+    private Toolbar myToolbar;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -50,6 +52,11 @@ public class MessageEncryption extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_encryption);
+
+        //Custom Appbar
+        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
 
         inputMessage = (EditText) findViewById(R.id.EnterMessage);
         inputPassword = (EditText) findViewById(R.id.passphrase);
@@ -143,5 +150,33 @@ public class MessageEncryption extends AppCompatActivity {
         return secretKeySpec;
 
 
+    }
+
+
+    //Overflow Menu
+    //For ActionBar's Overflow Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menuactionbar, menu);
+        //U can find item set icon and stuff...
+        //MenuItem item= menu.findItem(R.id.action_search);
+        return true;
+    }
+    //For Performing Actions on Overflow Menu | Action Bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.sign_out:
+                //Bug Reproduced
+                finishAffinity();
+                break;
+            case R.id.about:
+                Intent a = new Intent(getApplicationContext(),About.class);
+                a.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(a);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
